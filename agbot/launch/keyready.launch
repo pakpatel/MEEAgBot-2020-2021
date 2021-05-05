@@ -1,0 +1,14 @@
+<launch>
+
+<include file="$(find agbot)/launch/arduino.launch"/>
+<node pkg="agbot" type= "agbot_base_controller.py" name= "agbot_move_base" output= "log" respawn= "true" /> 
+
+<node pkg="agbot" type= "cmd_vel_to_ackermann_drive.py" name= "cmd_to_ackermann" output= "log" respawn= "true" />
+
+<!--
+<node name="ackermann_drive_keyop" type="ackermann_drive_keyop.py" pkg="ackermann_drive_teleop" output='screen'/>
+-->
+<include file="$(find agbot)/launch/localization.launch" />
+
+
+</launch>

@@ -1,0 +1,26 @@
+<launch>
+
+<!-- NAVsat Transform Node -->
+<node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" clear_params="true">
+<param name="magnetic_declination_radians" value="0"/>
+<param name="yaw_offset" value="0"/>
+<param name="zero_altitude" value="true"/>
+<param name="use_odometry_yaw" value="false"/>
+<param name="wait_for_datum" value="false"/>
+<param name="publish_filtered_gps" value="true"/>
+<param name="broadcast_utm_transform" value="false"/>
+
+<remap from="/tfsensors/imu1" to="/imu" />
+<remap from="/tcpfix" to="/fix" />
+<remap from="/odometry/filtered" to="/odometry/filtered" />
+</node>
+
+<!-- Run the ekf for map to odom config -->
+<node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_with_gps">
+<rosparam command="load" file="$(find robot_localization)/params/robot_localization_with_gps.yaml" />
+</node>
+
+<!-- Transforms -->
+<node pkg="tf" type="static_transform_publisher" name="gps_transform" args="0.68 0 1.67 0 0 0 base_link gps 10" />
+<node pkg="tf" type="static_transform_publisher" name="base_footprint_transform" args="0 0 0 0 0 0 base_link base_footprint 10" />
+</launch>

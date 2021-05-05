@@ -1,0 +1,9 @@
+<launch>
+
+<node pkg="agbot" type= "agbot_base_controller.py" name= "agbot_move_base" output= "log" respawn= "true" /> 
+
+<node pkg="agbot" type= "cmd_vel_to_ackermann_drive.py" name= "cmd_to_ackermann" output= "log" respawn= "true" />
+
+<node pkg="agbot" type= "test2.py" name= "script" output= "log" respawn= "true" />
+
+</launch>

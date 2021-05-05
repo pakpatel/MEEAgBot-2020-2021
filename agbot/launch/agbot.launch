@@ -1,0 +1,11 @@
+<launch>
+
+<node pkg="agbot" type= "agbot_base_controller.py" name= "agbot_move_base"
+output= "log" respawn= "true" />
+
+<node pkg="agbot" type= "cmd_vel_to_ackermann_drive.py" name= "cmd_to_ackermann" output= "log" respawn= "true" />
+
+<!-- <include file="$(find agbot)/launch/localization.launch" /> -->
+<include file="$(find agbot)/launch/carlike_robot.launch" />
+
+</launch>
